@@ -1,5 +1,8 @@
 """
 This is an implementation of a singly linked list in python
+
+Resources used:
+1. LucidProgramming on youtube: https://www.youtube.com/watch?v=FSsriWQ0qYE&list=PL5tcWHG-UPH112e7AN7C-fwDVPVrt0wpV&index=5
 """
 
 # Create a class node with the data and next pointer variables
@@ -10,6 +13,9 @@ class Node:
 
 		self.data = data
 		self.next_node = None 
+
+
+# Singly Linked List
 
 class LinkedList:
 
@@ -119,15 +125,24 @@ class LinkedList:
 		msg = "Tagert node data {} is not in the linked list".format(targetNodeData)
 		return msg
 
-	def deleteNode(self, targetNodeData):
-		# Scenario 1: Linked lis is empty
+	def deleteNode(self, targetNodeData): # 
+		# Assumption made is that the keys are eunique
+		# Scenario 1: Linked list is empty
 		# scenario 2: Target Node not in the linked list
+		# Scenario 3: Deleting the head node
 
 		if self.head is None:
 			msg = "Linked List is empty"
 			return msg
 
 		current_node = self.head
+
+		# if deleting the head
+		if current_node.data == targetNodeData:
+			self.head = current_node.next_node
+			# Then set the current node to none
+			current_node = None
+			return
 
 		while current_node.next_node != None: # traverse through the list searching for the target node 
 			if current_node.next_node.data == targetNodeData:
@@ -144,6 +159,38 @@ class LinkedList:
 		msg = "Node {} not in the linked list".format(targetNodeData)
 		return msg
 
+	def delByIndex(self, index):
+
+		if self.head is None:
+			msg = " Linked list is empty"
+			return msg
+
+
+		current_node = self.head
+
+		if index == 0:
+			self.head = current_node.next_node
+			current = None
+			return
+
+		counter = 1
+
+		while current_node.next_node!= None:
+			if counter == index:
+				prevNode = current_node
+				targetNode = prevNode.next_node
+				nexNode = targetNode.next_node
+
+				prevNode.next_node = nexNode
+				targetNode = None
+				return
+			counter += 1
+			current_node = current_node.next_node
+		msg = "Index not in this list"
+		return msg
+
+	
+
 		
 
 
@@ -156,7 +203,14 @@ llist.appendNode(3)
 llist.appendNode(4)
 llist.appendNode(5)
 llist.appendNode(6)
-print(llist.insertNode(7,4))
-print(llist.deleteNode(2))
+print(llist.insertNode(4,1))
+# print(llist.deleteNode(6))
+print(llist.delByIndex(4))
 print(llist.printNodeData())
+
+
+
+
+# Doubly linked List
+
 
