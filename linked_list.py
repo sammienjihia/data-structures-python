@@ -39,6 +39,8 @@ class LinkedList:
 			print(current_node.data)
 
 			current_node = current_node.next_node
+
+
 		
 
 	def searchNode(self, data):
@@ -189,6 +191,170 @@ class LinkedList:
 		msg = "Index not in this list"
 		return msg
 
+
+	def getLength(self): # Iterative
+		current_node = self.head
+		counter = 0
+
+		while current_node != None:
+			counter += 1
+			current_node = current_node.next_node 
+
+		return counter
+
+
+	def NodeSwap(self, input1, input2):
+
+		Node1, Node2 = None, None
+
+		# first check if the inputs are qual ti each other
+		if input1 == input2:
+			msg = "The nodes to be swapped seems to be equal"
+			return msg
+
+		# check if the linked list is empty
+		current_node = self.head
+
+		if current_node is None:
+			msg = "The linked list is empty"
+			return msg
+
+		# Check if the linked list has only one node
+		if current_node.next_node is None:
+			msg = "This linked list has only one node"
+			return msg
+
+		# scenario where one of the inputs is the head node
+
+		if current_node.data == input1:
+			prev1 = None
+			Node1 = current_node
+
+		if current_node.data == input2:
+			prev2 = None
+			Node2 = current_node
+
+		while current_node.next_node != None:
+
+			# we check if the data of this node is either of the inputs
+
+			if current_node.next_node.data == input1:
+				prev1 = current_node
+				Node1 = current_node.next_node
+
+			if current_node.next_node.data == input2:
+				prev2 = current_node
+				Node2 = current_node.next_node
+
+			current_node = current_node.next_node
+
+		# check if both the inputs were in the linked list
+		if Node1 and Node2:
+			# Do our swap logic
+			# First check if the scenario where one of the nodes to be swapped is the head node
+			if prev1 is None:
+				self.head = Node2
+			else:
+				prev1.next_node = Node2
+
+			if prev2 is None:
+				self.head = Node1
+			else:
+				prev2.next_node = Node1
+
+			# swap a,b = b,c //Simple swap in python
+			# we know that the next node of Node 1 should point to the next node of Node2 and vice versa
+			Node1.next_node, Node2.next_node = Node2.next_node, Node1.next_node
+
+		else:
+			msg = "One or all of your inputs were not in linked list"
+			return msg
+
+
+
+	def nodeSwap_recap(self, input1, input2):
+
+		targetNode1 = None
+		targetNode2 = None
+
+		# check if the inputs are equal
+		if input1 == input2:
+			msg = "Inputs are simillar, cannot swap"
+			return msg
+
+		# check if linked list is empty
+		current_node = self.head
+		if current_node is None:
+			msg="Linked list is empty"
+			return msg
+
+		# check if linked list has more than one node
+		if current_node.next_node is None:
+			msg="Linked list has only one node"
+			return msg
+
+		# Scenario where one of the inputs is the head  node of the linked list
+		if current_node.data == input1:
+			prev1 = None
+			targetNode1 = current_node
+
+		if current_node.data == input2:
+			prev2 = None
+			targetNode2 = current_node
+
+		#if none of the inputs is the head node, then traverse the linked list in search of the inputs
+		while current_node.next_node is not None:
+			print("%%%%%%%%%")
+
+			if current_node.next_node.data == input1:
+				prev1 = current_node
+				targetNode1 = current_node.next_node
+
+			if current_node.next_node.data == input2:
+				prev2 =  current_node
+				targetNode2 = current_node.next_node
+			
+			# increament the counter
+			current_node = current_node.next_node
+
+		# perform the swap
+
+		if targetNode1 and targetNode2:
+			print("############33")
+			print(targetNode1.data)
+			# handle scenario where one of the inouts is the head node
+			# if not then make the previous node to the target node point to the other target node
+			if prev1 == None:
+				self.head = targetNode2
+			else:
+				prev1.next_node = targetNode2
+
+			if prev2 == None:
+				self.head = targetNode1
+			else:
+				prev2.next_node = targetNode1
+
+
+			# then swap the target nodes using the all basic and known python swap
+			targetNode1.next_node, targetNode2.next_node = targetNode2.next_node, targetNode1.next_node
+
+		else:
+			msg="one or both of the inputs is not in the linked list"
+			return msg
+
+
+
+
+
+
+
+
+
+
+
+
+		
+
 	
 
 		
@@ -203,10 +369,17 @@ llist.appendNode(3)
 llist.appendNode(4)
 llist.appendNode(5)
 llist.appendNode(6)
-print(llist.insertNode(4,1))
+# print(llist.insertNode(4,1))
 # print(llist.deleteNode(6))
-print(llist.delByIndex(4))
+# print(llist.delByIndex(5))
+# print(llist.NodeSwap(1,2))
+print(llist.nodeSwap_recap(12,12))
 print(llist.printNodeData())
+
+
+
+
+# print(llist.getLength())
 
 
 
