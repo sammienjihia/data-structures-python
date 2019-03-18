@@ -344,6 +344,48 @@ class LinkedList:
 
 
 
+	def reverseLinkedList(self):
+		# Important items to look at 
+		# 1. Prev node
+		# 2. Current node
+		# 3. Next node
+
+		# First check if the linked list is empty
+		if self.head is None:
+			msg = "Cannot reverse an empty linked list"
+			return msg
+
+		current_node = self.head
+
+		# Check if there's only one node in the linked list
+		if current_node.next_node is None:
+			msg = "Cannot reverse a linked list with only one node"
+			return msg
+
+		prev_node = None
+
+		# If there's more than one node in the linked list, then we can reverse the linked list
+
+		while current_node.next_node is not None:
+			# Keep track of the prev_node and the current node's next node
+			next_node = current_node.next_node
+
+			current_node.next_node = prev_node
+
+			# increment the prev and current node counters
+			prev_node = current_node
+			current_node = next_node
+
+			# At the end of this iteration, the last node will still have it's next pointer in the default
+
+		# make the last node the head 
+		self.head = current_node
+		current_node.next_node = prev_node
+
+
+
+
+
 
 
 
@@ -373,7 +415,8 @@ llist.appendNode(6)
 # print(llist.deleteNode(6))
 # print(llist.delByIndex(5))
 # print(llist.NodeSwap(1,2))
-print(llist.nodeSwap_recap(12,12))
+print(llist.reverseLinkedList())
+# print(llist.nodeSwap_recap(12,12))
 print(llist.printNodeData())
 
 
