@@ -382,6 +382,51 @@ class LinkedList:
 		self.head = current_node
 		current_node.next_node = prev_node
 
+	def reversedLinkedListRecirsive(self):
+
+		# check if the linked list is empty
+		if self.head is None:
+			msg="The linked list is empty, cannot reverse"
+			return msg
+
+		# check of there's only one node in the linked list
+		current_node = self.head
+
+		if current_node.next_node is None:
+			msg="Cannot reverse a linked list with only one node"
+			return msg
+
+		prev = None
+
+		# call our base case
+		current_node, prev = self._reverseRecursive(current_node, prev)
+
+		self.head = current_node
+		current_node.next_node = prev
+
+	def _reverseRecursive(self, current_node, prev):
+
+		if current_node.next_node is None:
+			return (current_node, prev)
+
+		else:
+			# capture the next node on a temp variable
+			nxt  = current_node.next_node
+
+
+			# point the current node's pointer to point the prev node
+			current_node.next_node = prev
+
+			# move the previous node pointer to the current node
+			prev = current_node
+
+			# move the current node pointer to point to the nxt node
+			current_node = nxt
+
+			# call this fucntion recursively
+			return self._reverseRecursive(current_node, prev)
+
+
 
 
 
